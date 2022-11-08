@@ -11,8 +11,8 @@ class Problem1 {
 //        pobi.add(132);
 //        crong.add(211);
 //        crong.add(212);
-//        int pobiScore = maxNum(pobi);
-//        int crongScore = maxNum(crong);
+//        int pobiScore = compare(pobi);
+//        int crongScore = compare(crong);
 //
 //        int answer = versus(pobiScore, crongScore);
 //        System.out.println(answer);
@@ -24,9 +24,8 @@ class Problem1 {
             int crongScore = compare(crong);
 
             return versus(pobiScore, crongScore);
-        } else {
-            return -1;
         }
+        return -1;
     }
 
     // 각 자릿수 덧셈
