@@ -1,6 +1,7 @@
 package onboarding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Problem4 {
     public static String solution(String word) {
@@ -9,10 +10,10 @@ public class Problem4 {
 
     public static String isConversion(String str) {
         int alphaNum = 26;
-        ArrayList<String> upper = new ArrayList<>();
-        ArrayList<String> lower = new ArrayList<>();
-        ArrayList<String> upper_reverse = new ArrayList<>();
-        ArrayList<String> lower_reverse = new ArrayList<>();
+        List<String> upper = new ArrayList<>();
+        List<String> lower = new ArrayList<>();
+        List<String> upper_reverse = new ArrayList<>();
+        List<String> lower_reverse = new ArrayList<>();
 
         for (int i = 0; i < alphaNum; i++) {
             upper.add(String.valueOf((char)('A' + i)));
@@ -21,22 +22,23 @@ public class Problem4 {
             lower_reverse.add(String.valueOf((char)('z' - i)));
         }
 
-        String[] conArr = str.split("");
+        char[] conArr = str.toCharArray();
 
-        String conStr = "";
+        StringBuilder sb = new StringBuilder();
+
+        int index;
 
         for (int i = 0; i < conArr.length; i++) {
-            for (int j = 0; j < alphaNum; j++) {
-                if (conArr[i].equals(upper.get(j))) {
-                    conStr += upper_reverse.get(j);
-                } else if (conArr[i].equals(lower.get(j))) {
-                    conStr += lower_reverse.get(j);
-                } else if (conArr[i].equals(" ")){
-                    conStr += " ";
-                    break;
-                }
+            if (conArr[i] > 'A' && conArr[i] < 'Z') {
+                index = upper.indexOf(String.valueOf(conArr[i]));
+                sb.append(upper_reverse.get(index));
+            } else if (conArr[i] > 'a' && conArr[i] < 'z') {
+                index = lower.indexOf(String.valueOf(conArr[i]));
+                sb.append(lower_reverse.get(index));
+            } else {
+                sb.append(conArr[i]);
             }
         }
-        return conStr;
+        return sb.toString();
     }
 }
