@@ -2,7 +2,6 @@ package onboarding;
 
 import org.assertj.core.util.Arrays;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Problem2 {
@@ -11,8 +10,7 @@ public class Problem2 {
             return "ERROR";
         }
 
-        String answer = getDetoxify(cryptogram);
-        return answer;
+        return getDetoxify(cryptogram);
     }
 
     public static boolean isValid(String str) {
