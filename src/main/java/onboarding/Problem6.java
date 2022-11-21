@@ -1,35 +1,27 @@
 package onboarding;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Problem6 {
     public static List<String> solution(List<List<String>> forms) {
-        List<String> answer = List.of("answer");
-        return answer;
+        return isDuplicates(forms);
     }
 
-    public static void main(String[] args) {
-        List<List<String>> forms = List.of(
-                List.of("jm@email.com", "제이엠"),
-                List.of("jason@email.com", "제이슨"),
-                List.of("woniee@email.com", "워니"),
-                List.of("mj@email.com", "엠제이"),
-                List.of("nowm@email.com", "이제엠")
-        );
+    public static List<String> isDuplicates(List<List<String>> forms) {
+        Hashtable<String, String> table = new Hashtable<>();
+        TreeSet<String> set = new TreeSet<>();
 
-    }
-
-    // 이름을 두 글자씩 나누는 함수
-    public static List<String> twoCharacter(String str) {
-        List<String> list = new ArrayList<>();
-
-        for (int i = 0; i < str.length() - 1; i++) {
-            String temp = "";
-            temp += str.charAt(i) + str.charAt(i + 1);
-            list.add(temp);
+        for (List<String> form : forms) {
+            for (int i = 1; i < form.get(1).length(); i++) {
+                if (table.get(form.get(1).substring(i - 1, i + 1)) == null) {   // table에 두개의 문자로 자른 값이 있는지 확인
+                    table.put(form.get(1).substring(i - 1, i + 1), form.get(0));    // 없으면 자른 값 넣기
+                } else {    // else면 그 값이 있는 것이므로 중복  -> set에 넣기
+                    set.add(form.get(0));   // 중복으로 걸러진 form의 이메일
+                    set.add(table.get(form.get(1).substring(i - 1, i + 1)));    // table에 매칭되는 이메일 저장
+                }
+            }
         }
 
-        return list;
+        return new ArrayList<>(set);
     }
 }
